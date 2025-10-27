@@ -1,10 +1,12 @@
 {
   "domain": "miner_pool_stats",
   "name": "Miner Pool Stats",
+  "version": "0.0.1",
   "codeowners": ["@PixelByProxy"],
   "config_flow": true,
   "dependencies": ["recorder"],
   "documentation": "https://www.home-assistant.io/integrations/miner_pool_stats",
+  "issue_tracker": "https://www.home-assistant.io/integrations/miner_pool_stats",
   "iot_class": "cloud_polling",
   "quality_scale": "bronze",
   "requirements": []
