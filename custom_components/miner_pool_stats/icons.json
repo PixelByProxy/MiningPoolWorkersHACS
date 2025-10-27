@@ -1,0 +1,21 @@
+{
+  "entity": {
+    "sensor": {
+      "total_paid": {
+        "default": "mdi:currency-usd"
+      },
+      "current_balance": {
+        "default": "mdi:currency-usd"
+      },
+      "worker_count": {
+        "default": "mdi:account-multiple"
+      },
+      "hash_rate": {
+        "default": "mdi:pound"
+      },
+      "best_difficulty": {
+        "default": "mdi:hard-hat"
+      }
+    }
+  }
+}

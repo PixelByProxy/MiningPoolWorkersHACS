@@ -1,0 +1,6 @@
+
+{
+  "name": "Miner Pool Stats",
+  "hacs": "0.0.1",
+  "homeassistant": "0.118.0"
+}
