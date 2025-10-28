@@ -70,7 +70,7 @@ class HashRate:
 
     def __init__(self, value: float, unit: HashRateUnit) -> None:
         """Initialize a HashRate instance with a value and unit."""
-        self.value = value
+        self.value = self._format_value(value)
         self.unit = unit
 
     @classmethod
@@ -147,6 +147,34 @@ class HashRate:
             converted_value = self.value * conversion_factor
 
         return HashRate(converted_value, unit)
+
+    def _format_value(self, value: float) -> float:
+        """Format to the smallest readable number."""
+        # For values less than 1, count leading zeros after decimal
+        if value < 1:
+            leading_zeros = self._count_digits_until_non_zero(value)
+            if leading_zeros > 2:
+                return value
+
+        return round(value, 2)
+
+    def _count_digits_until_non_zero(self, num: float) -> int:
+        """Count the number of digits after the decimal point until the first non-zero digit."""
+        # Convert the number to a string
+        num_str = f"{num:.16f}".rstrip("0")  # Format to avoid floating-point issues
+        if "." not in num_str:
+            return 0  # No decimal point means no digits after it
+
+        decimal_part = num_str.split(".")[1]  # Get the part after the decimal
+        count = 0
+
+        for digit in decimal_part:
+            if digit == "0":
+                count += 1
+            else:
+                break
+
+        return count
 
     def __str__(self):
         """Return the string representation of the hash rate."""
