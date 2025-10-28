@@ -1,0 +1,40 @@
+{
+    "config": {
+        "abort": {
+            "already_configured": "Device is already configured"
+        },
+        "error": {
+            "cannot_connect": "Failed to connect",
+            "invalid_auth": "Invalid authentication",
+            "unknown": "Unexpected error"
+        },
+        "step": {
+            "user": {
+                "data": {
+                    "host": "Host",
+                    "password": "Password",
+                    "username": "Username"
+                }
+            }
+        }
+    },
+    "entity": {
+        "sensor": {
+            "best_difficulty": {
+                "name": "Best Difficulty"
+            },
+            "current_balance": {
+                "name": "Current Balance"
+            },
+            "hash_rate": {
+                "name": "Hashrate"
+            },
+            "total_paid": {
+                "name": "Total Paid"
+            },
+            "worker_count": {
+                "name": "Workers"
+            }
+        }
+    }
+}
