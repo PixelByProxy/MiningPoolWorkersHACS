@@ -206,6 +206,18 @@ class PoolAddressWorkerSensorEntity(PoolAddressWorkerDeviceEntity, SensorEntity)
     @callback
     def _handle_coordinator_update(self) -> None:
         """Handle updated data from the coordinator."""
+        updated_worker = next(
+            (
+                w
+                for w in self.coordinator.data.worker_list
+                if w.name == self.worker_name
+            ),
+            None,
+        )
+        if updated_worker is not None:
+            self.worker = updated_worker
+        else:
+            self.worker.is_online = False
         self._update_properties()
         self.async_write_ha_state()
 

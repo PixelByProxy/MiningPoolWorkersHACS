@@ -51,6 +51,7 @@ class PoolAddressWorkerDeviceEntity(CoordinatorEntity[PoolCoordinator]):
             coin = CryptoCoin(pool_config.coin_key).name
         except ValueError:
             coin = pool_config.coin_key
+        self.worker_name = worker_name
         self._attr_device_info = DeviceInfo(
             identifiers={(DOMAIN, f"{config_entry.entry_id}-{worker_name}")},
             manufacturer=pool_config.pool_name,
