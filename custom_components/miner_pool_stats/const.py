@@ -24,6 +24,8 @@ POOL_SOURCE_SOLO_POOL_KEY = "solo_pool"
 POOL_SOURCE_SOLO_POOL_NAME = "SoloPool.org"
 POOL_SOURCE_COIN_MINERS_KEY = "coin_miners"
 POOL_SOURCE_COIN_MINERS_NAME = "Coin-Miners"
+POOL_SOURCE_CK_POOL_KEY = "ck_pool"
+POOL_SOURCE_CK_POOL_NAME = "solo.ckpool.org"
 
 WALLET_ADDRESS = "Wallet Address"
 WORKER = "Worker"

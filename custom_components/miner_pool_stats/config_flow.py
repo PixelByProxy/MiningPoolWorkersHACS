@@ -26,6 +26,8 @@ from .const import (
     CONF_TITLE,
     CONF_UNIQUE_ID,
     DOMAIN,
+    POOL_SOURCE_CK_POOL_KEY,
+    POOL_SOURCE_CK_POOL_NAME,
     POOL_SOURCE_COIN_MINERS_KEY,
     POOL_SOURCE_COIN_MINERS_NAME,
     POOL_SOURCE_F2_POOL_COINS,
@@ -63,6 +65,10 @@ STEP_POOL_SOURCE_SCHEMA = vol.Schema(
                     SelectOptionDict(
                         value=POOL_SOURCE_SOLO_POOL_KEY,
                         label=POOL_SOURCE_SOLO_POOL_NAME,
+                    ),
+                    SelectOptionDict(
+                        value=POOL_SOURCE_CK_POOL_KEY,
+                        label=POOL_SOURCE_CK_POOL_NAME,
                     ),
                 ],
                 mode=SelectSelectorMode.DROPDOWN,
@@ -159,6 +165,10 @@ class PoolConfigFlow(ConfigFlow, domain=DOMAIN):
 
         if user_input[CONF_POOL_KEY] == POOL_SOURCE_COIN_MINERS_KEY:
             self._data[CONF_POOL_NAME] = POOL_SOURCE_COIN_MINERS_NAME
+            return await self.async_step_wallet(user_input)
+
+        if user_input[CONF_POOL_KEY] == POOL_SOURCE_CK_POOL_KEY:
+            self._data[CONF_POOL_NAME] = POOL_SOURCE_CK_POOL_NAME
             return await self.async_step_wallet(user_input)
 
         errors["base"] = "Invalid pool source"

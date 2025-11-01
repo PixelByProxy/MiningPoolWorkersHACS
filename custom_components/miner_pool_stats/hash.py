@@ -38,19 +38,19 @@ class HashRateUnit(IntEnum):
     def from_str(cls, value: str):
         """Create a HashRateUnit from a string representation."""
 
-        if value == "KH":
+        if value in {"KH", "K"}:
             return cls.KH
-        if value == "MH":
+        if value in {"MH", "M"}:
             return cls.MH
-        if value == "GH":
+        if value in {"GH", "G"}:
             return cls.GH
-        if value == "TH":
+        if value in {"TH", "T"}:
             return cls.TH
-        if value == "PH":
+        if value in {"PH", "P"}:
             return cls.PH
-        if value == "EH":
+        if value in {"EH", "E"}:
             return cls.EH
-        if value == "ZH":
+        if value in {"ZH", "Z"}:
             return cls.ZH
         return cls.H
 
@@ -77,19 +77,19 @@ class HashRate:
     def from_known_number(cls, value: float, unit: str):
         """Create a HashRate instance from a numeric value and unit string."""
 
-        if unit == "KH":
+        if unit in {"KH", "K"}:
             return cls(value, HashRateUnit.KH)
-        if unit == "MH":
+        if unit in {"MH", "M"}:
             return cls(value, HashRateUnit.MH)
-        if unit == "GH":
+        if unit in {"GH", "G"}:
             return cls(value, HashRateUnit.GH)
-        if unit == "TH":
+        if unit in {"TH", "T"}:
             return cls(value, HashRateUnit.TH)
-        if unit == "PH":
+        if unit in {"PH", "P"}:
             return cls(value, HashRateUnit.PH)
-        if unit == "EH":
+        if unit in {"EH", "E"}:
             return cls(value, HashRateUnit.EH)
-        if unit == "ZH":
+        if unit in {"ZH", "Z"}:
             return cls(value, HashRateUnit.ZH)
 
         return cls(value, HashRateUnit.H)
@@ -116,6 +116,35 @@ class HashRate:
         translated_value = value / unit.value
 
         return cls(translated_value, unit)
+
+    @classmethod
+    def from_string(cls, value: str):
+        """Create a HashRate instance from a string (e.g., '1.2G' or '1.35T').
+
+        Args:
+            value: A string in the format 'floatValueUnit' (e.g., '1.2G', '1.35T')
+
+        Returns:
+            A HashRate instance representing the parsed value
+        """
+        if not value or value == "0":
+            return cls(0, HashRateUnit.H)
+
+        # Find the last digit in the string
+        last_digit_index = -1
+        for i, char in enumerate(value):
+            if char.isdigit() or char == ".":
+                last_digit_index = i
+
+        # Split into value and unit parts
+        value_part = value[: last_digit_index + 1]
+        unit_part = value[last_digit_index + 1 :]
+
+        try:
+            float_value = float(value_part)
+            return cls.from_known_number(float_value, unit_part)
+        except (ValueError, TypeError):
+            return cls(0, HashRateUnit.H)
 
     def to_unit(self, unit: HashRateUnit):
         """Convert the hash rate to a different unit."""
